@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌱 SHAMBA — Crop Progress Tracker
+
+A full-stack field management system for tracking crop progress across multiple fields during a growing season.
+
+---
+
+## Tech Stack
+
+- **Next.js 15** (App Router)
+- **Supabase** (Auth, PostgreSQL, RLS)
+- **shadcn/ui** + **Tailwind CSS**
+- **TypeScript**
+
+---
+
+## Features
+
+| Feature | Admin | Field Agent |
+|---|---|---|
+| Dashboard overview | ✅ All fields | ✅ Assigned fields |
+| Create / edit / delete fields | ✅ | ❌ |
+| Assign agents to fields | ✅ | ❌ |
+| View all field updates | ✅ | ✅ (own fields) |
+| Log field updates & stage changes | ❌ | ✅ |
+| Manage team roles | ✅ | ❌ |
+
+---
+
+## Field Lifecycle
+
+```
+Planted → Growing → Ready → Harvested
+```
+
+---
+
+## Field Status Logic
+
+Each field carries a **computed status** derived from its stage and temporal data. No extra database column is needed — it's computed in `lib/field-utils.ts` at read time.
+
+### `active`
+The field is progressing normally. No anomalies detected.
+
+### `at_risk`
+Triggered by any of these conditions:
+
+| Condition | Rationale |
+|---|---|
+| Stage is **Planted** and `planting_date` was > **21 days** ago | Seeds should have germinated and progressed within 3 weeks. Stagnation indicates possible germination failure or neglect. |
+| Stage is **Growing** and `updated_at` was > **30 days** ago | A healthy growing field should be monitored monthly. Lack of updates may signal abandonment or agent inaction. |
+| Stage is **Ready** and `updated_at` was > **10 days** ago | A crop left "ready" for too long risks overripening, pest damage, or spoilage. |
+
+### `completed`
+The field's stage is **Harvested**. The growing cycle is done.
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repo and install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Copy `.env.example` to `.env` and fill in your Supabase credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the SQL in `supabase/schema.sql` in your Supabase SQL Editor.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Enable Google OAuth in Supabase → Authentication → Providers.
 
-## Learn More
+5. Add `http://localhost:3000/auth/callback` to Supabase → Authentication → URL Configuration.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. Run the dev server:
+```bash
+   npm run dev
+```
