@@ -54,7 +54,7 @@ export default function AuthForm({ mode }: Props) {
           }, { onConflict: 'id' })
         }
 
-        // Same flow as Google — go pick your role
+        // Same flow as Google — go pick your role at onboarding as opposed to assigning using dropdown
         toast.success('Account created! Choose your role to continue.')
         router.push('/onboarding')
         router.refresh()
