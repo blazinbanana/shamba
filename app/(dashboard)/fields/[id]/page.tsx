@@ -39,6 +39,7 @@ export default async function FieldDetailPage({ params }: Props) {
   const field = withStatus(rawField as Field)
   const stageCfg = STAGE_CONFIG[field.current_stage]
   const days = getDaysSincePlanting(field.planting_date)
+  const Icon = stageCfg.icon
 
   const { data: rawUpdates } = await supabase
     .from('field_updates')
@@ -88,7 +89,7 @@ export default async function FieldDetailPage({ params }: Props) {
                 <div>
                   <p className="text-muted-foreground text-xs uppercase tracking-wide mb-1">Current Stage</p>
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${stageCfg.bg} ${stageCfg.color}`}>
-                    {stageCfg.icon} {stageCfg.label}
+                    <Icon className="w-3.5 h-3.5 shrink-0" /> {stageCfg.label}
                   </span>
                 </div>
                 <div>
