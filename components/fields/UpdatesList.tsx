@@ -29,6 +29,9 @@ export default function UpdatesList({ updates }: Props) {
       <CardContent className="divide-y divide-border">
         {updates.map(update => {
           const cfg      = STAGE_CONFIG[update.stage]
+          
+          const Icon     = cfg.icon
+          
           const initials = update.agent?.full_name
             ? update.agent.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
             : '?'
@@ -46,8 +49,9 @@ export default function UpdatesList({ updates }: Props) {
                     <span className="text-sm font-medium text-foreground">
                       {update.agent?.full_name ?? update.agent?.email ?? 'Unknown agent'}
                     </span>
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${cfg.bg} ${cfg.color}`}>
-                      {cfg.icon} {cfg.label}
+                    
+                    <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${cfg.bg} ${cfg.color}`}>
+                      <Icon className="w-3 h-3 shrink-0" /> {cfg.label}
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground mb-1">{update.notes}</p>

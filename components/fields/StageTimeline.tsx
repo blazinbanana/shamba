@@ -10,8 +10,11 @@ export default function StageTimeline({ currentStage }: Props) {
 
   return (
     <div className="flex items-center gap-0">
-      {FIELD_STAGES.map((stage, idx) => {
+     {FIELD_STAGES.map((stage, idx) => {
         const cfg  = STAGE_CONFIG[stage]
+        // 1. Extract the icon component
+        const Icon = cfg.icon
+        
         const done = cfg.step < currentStep
         const active = stage === currentStage
         const last = idx === FIELD_STAGES.length - 1
@@ -25,7 +28,8 @@ export default function StageTimeline({ currentStage }: Props) {
                 active ? 'border-emerald-600 bg-emerald-50 text-emerald-700' :
                          'border-gray-200 bg-white text-gray-400'
               )}>
-                {done ? <Check className="w-4 h-4" /> : cfg.icon}
+                
+                {done ? <Check className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
               </div>
               <span className={cn(
                 'text-xs mt-1 font-medium whitespace-nowrap',
