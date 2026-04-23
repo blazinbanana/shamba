@@ -55,6 +55,7 @@ The field's stage is **Harvested**. The growing cycle is done.
 
 ## assumptions made
 > Admin can see all fields  - no containerization done for them
+
 > Admin can turn Field Agent into Admin if they want to
 
 ---
