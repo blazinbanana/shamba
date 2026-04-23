@@ -1,11 +1,11 @@
 import type { FieldStage, FieldStatus } from './types'
-
+import { Sprout, Leaf, Wheat, CheckCircle, type LucideIcon } from 'lucide-react'
 export const STAGE_CONFIG: Record<FieldStage, {
   label: string
   color: string
   bg: string
   border: string
-  icon: string
+  icon: LucideIcon 
   step: number
 }> = {
   planted: {
@@ -13,7 +13,7 @@ export const STAGE_CONFIG: Record<FieldStage, {
     color: 'text-amber-700',
     bg: 'bg-amber-100',
     border: 'border-amber-300',
-    icon: '🌱',
+    icon: Sprout, 
     step: 1,
   },
   growing: {
@@ -21,7 +21,7 @@ export const STAGE_CONFIG: Record<FieldStage, {
     color: 'text-emerald-700',
     bg: 'bg-emerald-100',
     border: 'border-emerald-300',
-    icon: '🌿',
+    icon: Leaf, 
     step: 2,
   },
   ready: {
@@ -29,7 +29,7 @@ export const STAGE_CONFIG: Record<FieldStage, {
     color: 'text-blue-700',
     bg: 'bg-blue-100',
     border: 'border-blue-300',
-    icon: '🌾',
+    icon: Wheat, 
     step: 3,
   },
   harvested: {
@@ -37,7 +37,7 @@ export const STAGE_CONFIG: Record<FieldStage, {
     color: 'text-purple-700',
     bg: 'bg-purple-100',
     border: 'border-purple-300',
-    icon: '✅',
+    icon: CheckCircle, 
     step: 4,
   },
 }

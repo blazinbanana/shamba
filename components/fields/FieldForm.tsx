@@ -125,14 +125,25 @@ export default function FieldForm({ field, agents, adminId }: Props) {
 
                 <div className="space-y-1.5">
                   <Label>Current Stage *</Label>
-                  <Select value={form.current_stage} onValueChange={v => set('current_stage', v)}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
-                    <SelectContent className="max-h-60">
-                      {FIELD_STAGES.map(s => (
-                        <SelectItem key={s} value={s}>{STAGE_CONFIG[s].icon} {STAGE_CONFIG[s].label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                 <Select value={form.current_stage} onValueChange={v => set('current_stage', v)}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent className="max-h-60 bg-white dark:bg-slate-950">
+                    {FIELD_STAGES.map(s => {
+                      // Extract the component reference so we can render it as a tag
+                      const Icon = STAGE_CONFIG[s].icon 
+                      
+                      return (
+                        <SelectItem key={s} value={s}>
+                          {/* Wrap icon and label in a flex container for alignment */}
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4" />
+                            <span>{STAGE_CONFIG[s].label}</span>
+                          </div>
+                        </SelectItem>
+                      )
+                    })}
+                  </SelectContent>
+                </Select>
                 </div>
 
                 <div className="space-y-1.5">
