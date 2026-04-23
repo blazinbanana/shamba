@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 export type UserRole = 'admin' | 'field_agent'
 export type FieldStage = 'planted' | 'growing' | 'ready' | 'harvested'
 export type FieldStatus = 'active' | 'at_risk' | 'completed'

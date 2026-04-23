@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 'use client'
 
 import { useState } from 'react'
@@ -54,7 +55,7 @@ export default function AuthForm({ mode }: Props) {
           }, { onConflict: 'id' })
         }
 
-        // Same flow as Google — go pick your role at onboarding as opposed to assigning using dropdown
+        //pick your role at onboarding as opposed to assigning using dropdown
         toast.success('Account created! Choose your role to continue.')
         router.push('/onboarding')
         router.refresh()
@@ -142,7 +143,7 @@ export default function AuthForm({ mode }: Props) {
               : 'Start tracking your crop progress today.'}
           </p>
 
-          {/* Google */}
+          {/* google */}
           <Button
             variant="outline"
             className="w-full h-11 border-2 font-medium gap-3 mb-6"
@@ -184,7 +185,7 @@ export default function AuthForm({ mode }: Props) {
             <div className="space-y-1.5">
               <Label htmlFor="email">Email address</Label>
               <Input
-                id="email" type="email" placeholder="jane@shamba.co"
+                id="email" type="email" placeholder="njeri@shamba.co"
                 value={form.email} onChange={e => set('email', e.target.value)}
                 required className="h-11"
               />

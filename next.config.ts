@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {

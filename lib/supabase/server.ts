@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 

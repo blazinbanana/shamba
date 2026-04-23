@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import Sidebar from '@/components/layout/Sidebar'
@@ -21,13 +22,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header profile={profile as Profile} />
-        {/* Add pb-20 on mobile so content isn't hidden behind bottom nav */}
+        {/* pb-20 on mobile so content isn't hidden behind bottom nav bar */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-24 lg:pb-8">
           {children}
         </main>
       </div>
 
-      {/* Mobile bottom navigation */}
+      {/* mobile bottom navigation */}
       <BottomNav profile={profile as Profile} />
     </div>
   )

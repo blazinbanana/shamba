@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import type { FieldStage, FieldStatus } from './types'
 import { Sprout, Leaf, Wheat, CheckCircle, type LucideIcon } from 'lucide-react'
 export const STAGE_CONFIG: Record<FieldStage, {

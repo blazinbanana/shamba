@@ -1,16 +1,17 @@
+// Copyright 2026 Caleb Maina
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function LoadingAgentsPage() {
   return (
     <div className="space-y-10 animate-pulse">
-      {/* Header */}
+      {/* header */}
       <div className="space-y-2">
         <Skeleton className="h-6 w-56" />
         <Skeleton className="h-4 w-80" />
       </div>
 
-      {/* Field Agents Section */}
+      {/* field agents section */}
       <section className="space-y-4">
         <Skeleton className="h-5 w-40" />
 
@@ -36,7 +37,7 @@ export default function LoadingAgentsPage() {
         </div>
       </section>
 
-      {/* Admins Section */}
+      {/* admins section */}
       <section className="space-y-4">
         <Skeleton className="h-5 w-32" />
 

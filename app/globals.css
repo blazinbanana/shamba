@@ -1,3 +1,4 @@
+/* Copyright 2026 Caleb Maina */
 @import "tailwindcss";
 
 /* added to fix styling issue with dropdowns */
@@ -36,8 +37,7 @@
 
 @layer base {
   :root {
-    font-size: 18px; 
-    
+    font-size: 18px;     /* set font size higher to increase readability */
     --background: 60 33% 98%;
     --foreground: 160 15% 10%;
     --card: 0 0% 100%;

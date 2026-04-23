@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent } from '@/components/ui/card'
@@ -35,10 +36,10 @@ if (profile?.role !== 'admin') redirect('/dashboard')
     <div className="space-y-10">
       <div>
         <h2 className="font-display text-2xl font-bold text-emerald-950">Team Management</h2>
-        <p className="text-muted-foreground mt-1">Manage your field agents and coordinators.</p>
+        <p className="text-muted-foreground mt-1">Manage your field agents.</p>
       </div>
 
-      {/* Field Agents */}
+      {/* field agents */}
       <section className="space-y-4">
         <div className="flex items-center gap-2">
           <h3 className="font-display font-semibold text-lg text-emerald-950">Field Agents</h3>
@@ -89,7 +90,7 @@ if (profile?.role !== 'admin') redirect('/dashboard')
         )}
       </section>
 
-      {/* Admins */}
+      {/* admins */}
       <section className="space-y-4">
         <div className="flex items-center gap-2">
           <h3 className="font-display font-semibold text-lg text-emerald-950">Admins</h3>

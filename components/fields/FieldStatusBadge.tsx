@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { cn } from '@/lib/utils'
 import { STATUS_CONFIG } from '@/lib/constants'
 import type { FieldStatus } from '@/lib/types'

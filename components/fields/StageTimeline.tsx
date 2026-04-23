@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { STAGE_CONFIG, FIELD_STAGES } from '@/lib/constants'
 import type { FieldStage } from '@/lib/types'
 import { cn } from '@/lib/utils'
@@ -12,7 +13,7 @@ export default function StageTimeline({ currentStage }: Props) {
     <div className="flex items-center gap-0">
      {FIELD_STAGES.map((stage, idx) => {
         const cfg  = STAGE_CONFIG[stage]
-        // 1. Extract the icon component
+        // extract the icon component
         const Icon = cfg.icon
         
         const done = cfg.step < currentStep

@@ -1,16 +1,17 @@
+// Copyright 2026 Caleb Maina
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 export default function DashboardLoading() {
   return (
     <div className="space-y-6">
-      {/* Dashboard Header */}
+      {/* dashboard header */}
       <div>
         <Skeleton className="h-8 w-40 mb-2" />
         <Skeleton className="h-4 w-64" />
       </div>
 
-      {/* Stat Cards Row */}
+      {/* stat cards row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[1, 2, 3, 4].map((i) => (
           <Card key={i}>
@@ -26,9 +27,9 @@ export default function DashboardLoading() {
         ))}
       </div>
 
-      {/* Main Content Area */}
+      {/* main */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Area */}
+        {/* left area */}
         <Card className="lg:col-span-2">
           <CardHeader>
             <Skeleton className="h-5 w-40" />
@@ -38,7 +39,7 @@ export default function DashboardLoading() {
           </CardContent>
         </Card>
 
-        {/* Right Area  */}
+        {/* right Area  */}
         <Card>
           <CardHeader>
             <Skeleton className="h-5 w-32" />

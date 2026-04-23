@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -17,11 +18,11 @@ export default function FieldsLoading() {
       <div className="space-y-3">
         <Skeleton className="h-10 w-full max-w-sm" />
         <div className="flex gap-2 flex-wrap">
-          <Skeleton className="h-8 w-14" /> {/* "Stage:" text */}
+          <Skeleton className="h-8 w-14" /> 
           <Skeleton className="h-8 w-24 rounded-full" />
           <Skeleton className="h-8 w-24 rounded-full" />
           <Skeleton className="h-8 w-24 rounded-full" />
-          <Skeleton className="h-8 w-14 ml-2" /> {/* "Status:" text */}
+          <Skeleton className="h-8 w-14 ml-2" /> 
           <Skeleton className="h-8 w-20 rounded-full" />
           <Skeleton className="h-8 w-20 rounded-full" />
         </div>

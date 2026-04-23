@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 'use client'
 
 import Link from 'next/link'

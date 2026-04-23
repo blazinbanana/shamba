@@ -1,13 +1,14 @@
+// Copyright 2026 Caleb Maina
 import type { Field, FieldStatus, FieldStage } from './types'
 
-/**
- * Computes a field's status from its current stage and temporal indicators.
- *
- * Rules:
- *  - completed  → stage is 'harvested'
- *  - at_risk    → (planted > 21 days) | (growing, no update > 30 days) | (ready, no harvest > 10 days)
- *  - active     → everything else
- */
+// 
+//   my logic
+//  
+//  rules:
+//  completed  - stage is 'harvested'
+//  at_risk    - (planted > 21 days) | (growing, no update > 30 days) | (ready, no harvest > 10 days)
+//  active     - everything else
+//  
 export function computeFieldStatus(
   field: Pick<Field, 'current_stage' | 'planting_date' | 'updated_at'>
 ): FieldStatus {

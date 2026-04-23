@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { formatDistanceToNow, format } from 'date-fns'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'

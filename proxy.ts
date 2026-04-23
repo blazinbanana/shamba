@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
@@ -24,16 +25,16 @@ export async function proxy(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
-  // Pages that don't require auth
+  // don't require auth
   const publicPaths = ['/login', '/signup', '/onboarding']
   const isPublicPath = publicPaths.some(p => pathname.startsWith(p))
 
-  // Logged-in users visiting login/signup → go to dashboard
+  // logged-in users visiting login/signup - go to dashboard
   if (user && (pathname === '/login' || pathname === '/signup')) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  // Unauthenticated users visiting protected pages → go to login
+  // unauthenticated users visiting protected pages - go to login
   if (!user && !isPublicPath && pathname !== '/') {
     return NextResponse.redirect(new URL('/login', request.url))
   }

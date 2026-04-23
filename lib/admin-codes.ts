@@ -1,8 +1,9 @@
+// Copyright 2026 Caleb Maina
 'use server'
 
 /**
- * Validates the admin code against the secret stored in environment variables.
- * The code is never exposed to the client — validation always happens server-side.
+ * validates the admin code against the one in .env
+ * the code is never exposed to the client 
  */
 export async function validateAdminCode(
   code: string

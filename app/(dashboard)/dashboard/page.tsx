@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { withStatus } from '@/lib/field-utils'
@@ -74,7 +75,7 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
 
   return (
     <div className="space-y-8">
-      {/* Welcome */}
+      {/* welcome */}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-display text-2xl font-bold text-emerald-950 flex items-center gap-3 sm:gap-4 flex-wrap">
@@ -97,7 +98,7 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
         )}
       </div>
 
-      {/* Stats */}
+      {/* stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard
           title="Total Fields"
@@ -118,7 +119,7 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* At-risk fields */}
+        {/* at risk fields */}
         {atRiskList.length > 0 && (
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
@@ -138,7 +139,7 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
           </div>
         )}
 
-        {/* Recent activity */}
+        {/* recent activity */}
         <div className="space-y-4">
           <h3 className="font-display font-semibold text-lg text-emerald-950 flex items-center gap-2">
             <Clock className="w-5 h-5 text-emerald-600" />
@@ -166,7 +167,7 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
         </div>
       </div>
 
-      {/* All fields grid */}
+      {/* all fields grid */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-display font-semibold text-lg text-emerald-950">

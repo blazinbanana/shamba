@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 'use client'
 
 import { useState } from 'react'
@@ -8,7 +9,7 @@ import { validateAdminCode } from '@/lib/admin-codes'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Loader2, Sprout, ClipboardList, Leaf, KeyRound, ShieldCheck } from 'lucide-react'
+import { Loader2, Sprout, ClipboardList, Leaf, KeyRound, ShieldCheck, LucideSprout} from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 type Role = 'admin' | 'field_agent'
@@ -87,7 +88,7 @@ export default function OnboardingForm() {
         </div>
 
         <h1 className="font-display text-3xl font-bold text-emerald-950 mb-2">
-          One last step 🌿
+          One last step <LucideSprout/>
         </h1>
         <p className="text-muted-foreground mb-8">
           How will you be using SHAMBA? Choose your role to get started.
@@ -151,7 +152,7 @@ export default function OnboardingForm() {
           })}
         </div>
 
-        {/* Admin code — slides in */}
+        {/* Admin code */}
         <div className={cn(
           'overflow-hidden transition-all duration-300',
           selected === 'admin' ? 'max-h-40 opacity-100 mb-6' : 'max-h-0 opacity-0 mb-0'

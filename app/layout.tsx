@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
@@ -12,7 +13,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: 'SHAMBA',
-  description: 'Farm Monitoring Platform',
+  description: 'Farm Monitoring Platform by Caleb',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { redirect, notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { withStatus, getDaysSincePlanting } from '@/lib/field-utils'
@@ -33,7 +34,7 @@ export default async function FieldDetailPage({ params }: Props) {
 
   if (!rawField) notFound()
 
-  // Agents can only view their own fields
+  // agents can only view fields assigned to them
   if (!isAdmin && rawField.assigned_agent_id !== user.id) redirect('/fields')
 
   const field = withStatus(rawField as Field)
@@ -52,7 +53,7 @@ export default async function FieldDetailPage({ params }: Props) {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      {/* Breadcrumb + actions */}
+      {/* breadcrumb + actions */}
       <div className="flex items-start justify-between">
         <div>
           <Button variant="ghost" asChild className="gap-1 text-muted-foreground -ml-2 mb-2">
@@ -71,7 +72,7 @@ export default async function FieldDetailPage({ params }: Props) {
         )}
       </div>
 
-      {/* Stage timeline */}
+      {/* stage timeline */}
       <Card>
         <CardContent className="pt-6">
           <StageTimeline currentStage={field.current_stage} />
@@ -79,9 +80,9 @@ export default async function FieldDetailPage({ params }: Props) {
       </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left: details */}
+        {/* left-details */}
         <div className="lg:col-span-2 space-y-5">
-          {/* Info card */}
+          {/* info card */}
           <Card>
             <CardContent className="p-5">
               <h3 className="font-display font-semibold text-base mb-4 text-emerald-950">Field Details</h3>
@@ -142,11 +143,11 @@ export default async function FieldDetailPage({ params }: Props) {
             </CardContent>
           </Card>
 
-          {/* Updates list */}
+          {/* updates list */}
           <UpdatesList updates={updates} />
         </div>
 
-        {/* Right: update form (agents only) */}
+        {/* right -update form (agents only) */}
         <div>
           {canUpdate && (
             <UpdateForm

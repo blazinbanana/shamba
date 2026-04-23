@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 'use client'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'

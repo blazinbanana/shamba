@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { Card, CardContent } from '@/components/ui/card'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'

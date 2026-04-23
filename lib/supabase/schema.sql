@@ -1,7 +1,8 @@
--- Enable UUID extension
+-- Copyright 2026 Caleb Maina
+-- enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- ─── PROFILES ────────────────────────────────────────────────────────────────
+--profiles
 CREATE TABLE public.profiles (
   id          UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
   full_name   TEXT,
@@ -13,7 +14,7 @@ CREATE TABLE public.profiles (
   updated_at  TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ─── FIELDS ──────────────────────────────────────────────────────────────────
+--fields
 CREATE TABLE public.fields (
   id                UUID    DEFAULT uuid_generate_v4() PRIMARY KEY,
   name              TEXT    NOT NULL,
@@ -30,7 +31,7 @@ CREATE TABLE public.fields (
   updated_at        TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ─── FIELD UPDATES ───────────────────────────────────────────────────────────
+-- field updates
 CREATE TABLE public.field_updates (
   id         UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   field_id   UUID REFERENCES public.fields(id) ON DELETE CASCADE NOT NULL,
@@ -40,19 +41,19 @@ CREATE TABLE public.field_updates (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ─── ROW LEVEL SECURITY ──────────────────────────────────────────────────────
+-- rls
 ALTER TABLE public.profiles     ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.fields       ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.field_updates ENABLE ROW LEVEL SECURITY;
 
--- Profiles: everyone can read; users update their own
+-- everyone can read profiles, users update their own
 CREATE POLICY "profiles_select"     ON public.profiles FOR SELECT TO authenticated USING (true);
 CREATE POLICY "profiles_insert_own" ON public.profiles FOR INSERT TO authenticated WITH CHECK (auth.uid() = id);
 CREATE POLICY "profiles_update_own" ON public.profiles FOR UPDATE TO authenticated USING (auth.uid() = id);
 CREATE POLICY "profiles_admin_update" ON public.profiles FOR UPDATE TO authenticated
   USING (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'));
 
--- Fields: admins full access; agents read + update their assigned fields
+-- fields admins full access, agents read + update their assigned fields
 CREATE POLICY "fields_admin_all" ON public.fields FOR ALL TO authenticated
   USING (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'));
 
@@ -62,7 +63,7 @@ CREATE POLICY "fields_agent_select" ON public.fields FOR SELECT TO authenticated
 CREATE POLICY "fields_agent_update" ON public.fields FOR UPDATE TO authenticated
   USING (assigned_agent_id = auth.uid()) WITH CHECK (assigned_agent_id = auth.uid());
 
--- Field updates: admins all; agents insert/select on their fields
+-- field updates, admins all, agents insert/select on their fields
 CREATE POLICY "updates_admin_all" ON public.field_updates FOR ALL TO authenticated
   USING (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'));
 
@@ -75,7 +76,7 @@ CREATE POLICY "updates_agent_insert" ON public.field_updates FOR INSERT TO authe
     EXISTS (SELECT 1 FROM public.fields WHERE id = field_id AND assigned_agent_id = auth.uid())
   );
 
--- ─── TRIGGERS ────────────────────────────────────────────────────────────────
+-- triggers
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN

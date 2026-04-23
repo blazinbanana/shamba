@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { redirect, notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import FieldForm from '@/components/fields/FieldForm'

@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 

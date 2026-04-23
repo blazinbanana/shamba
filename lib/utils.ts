@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 

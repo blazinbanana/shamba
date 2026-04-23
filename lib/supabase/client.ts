@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { createBrowserClient } from '@supabase/ssr'
 
 export function createClient() {

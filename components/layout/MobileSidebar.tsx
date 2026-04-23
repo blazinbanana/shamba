@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 'use client'
 
 import { useState } from 'react'
@@ -6,7 +7,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import {
-  Sheet, SheetContent, SheetTrigger, SheetTitle, // <-- Imported here
+  Sheet, SheetContent, SheetTrigger, SheetTitle, 
 } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -58,7 +59,7 @@ export default function MobileSidebar({ profile }: Props) {
       </SheetTrigger>
       <SheetContent side="left" className="p-0 w-72 sidebar-gradient border-none">
         
-        {/* ADDED: Visually hidden title to satisfy Radix UI accessibility requirements */}
+        {/* hid title to fix sheet trigger errors*/}
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
         {/* Logo */}

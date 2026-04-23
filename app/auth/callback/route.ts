@@ -1,3 +1,4 @@
+// Copyright 2026 Caleb Maina
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
@@ -14,14 +15,14 @@ export async function GET(request: Request) {
       const { data: { user } } = await supabase.auth.getUser()
 
       if (user) {
-        // Check if this user has selected their role yet
+        // check if user has selected their role yet
         const { data: profile } = await supabase
           .from('profiles')
           .select('role_selected')
           .eq('id', user.id)
           .single()
 
-        // New Google user — send to role selection before dashboard
+        // new google sign in — send to role selection before dashboard
         if (profile && !profile.role_selected) {
           return NextResponse.redirect(`${origin}/onboarding`)
         }
