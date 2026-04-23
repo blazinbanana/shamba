@@ -36,6 +36,8 @@
 
 @layer base {
   :root {
+    font-size: 18px; 
+    
     --background: 60 33% 98%;
     --foreground: 160 15% 10%;
     --card: 0 0% 100%;

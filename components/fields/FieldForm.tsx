@@ -108,7 +108,7 @@ export default function FieldForm({ field, agents, adminId }: Props) {
                   <Input
                     value={form.name}
                     onChange={e => set('name', e.target.value)}
-                    placeholder="e.g. North Hill Plot A"
+                    placeholder="e.g. Subukia Plot A"
                     required
                   />
                 </div>
