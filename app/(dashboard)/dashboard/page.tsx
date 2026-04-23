@@ -77,11 +77,14 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
       {/* Welcome */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display text-2xl font-bold text-emerald-950 flex items-baseline gap-3 flex-wrap">
+          <h2 className="font-display text-2xl font-bold text-emerald-950 flex items-center gap-3 sm:gap-4 flex-wrap">
             <span>
               Good {getGreeting()}, {profile.full_name?.split(' ')[0] ?? 'there'}
             </span>
-            <FarmerTractorIcon className="w-11 h-11 translate-y-[2px]" />
+            <FarmerTractorIcon 
+              size={56} 
+              className="-translate-y-1.5 sm:-translate-y-2" 
+            />
           </h2>
           <p className="text-muted-foreground mt-1">
             {isAdmin ? 'Here is an overview of all your fields.' : 'Here is the status of your assigned fields.'}
