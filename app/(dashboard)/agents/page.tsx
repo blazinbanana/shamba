@@ -11,19 +11,20 @@ export default async function AgentsPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
+// parallel fetching to help cut load time
+  const [
+  { data: profile },
+  { data: agents },
+  { data: admins },
+  { data: fieldCounts }
+] = await Promise.all([
+  supabase.from('profiles').select('role').eq('id', user.id).single(),
+  supabase.from('profiles').select('*').eq('role', 'field_agent').order('full_name'),
+  supabase.from('profiles').select('*').eq('role', 'admin').order('full_name'),
+  supabase.from('fields').select('assigned_agent_id').not('assigned_agent_id', 'is', null),
+])
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
-  if (profile?.role !== 'admin') redirect('/dashboard')
-
-  const { data: agents } = await supabase
-    .from('profiles').select('*').eq('role', 'field_agent').order('full_name')
-
-  const { data: admins } = await supabase
-    .from('profiles').select('*').eq('role', 'admin').order('full_name')
-
-  const { data: fieldCounts } = await supabase
-    .from('fields').select('assigned_agent_id').not('assigned_agent_id', 'is', null)
-
+if (profile?.role !== 'admin') redirect('/dashboard')
   const countMap: Record<string, number> = {}
   ;(fieldCounts ?? []).forEach(f => {
     if (f.assigned_agent_id)

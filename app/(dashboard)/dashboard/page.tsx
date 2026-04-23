@@ -13,29 +13,47 @@ import {
   Users, Plus, ArrowRight, Clock,
 } from 'lucide-react'
 import type { Field, FieldUpdate, Profile } from '@/lib/types'
-
+function FarmerIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path d="M12 2C9 2 7 4 7 6s2 4 5 4 5-2 5-4-2-4-5-4z" stroke="currentColor" strokeWidth="2"/>
+      <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" strokeWidth="2"/>
+    </svg>
+  )
+}
 export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
-    .from('profiles').select('*').eq('id', user.id).single()
-  if (!profile) redirect('/login')
+const { data: profile } = await supabase
+  .from('profiles').select('*').eq('id', user.id).single()
+if (!profile) redirect('/login')
 
-  const isAdmin = profile.role === 'admin'
+const isAdmin = profile.role === 'admin'
 
-  // ── Fetch fields ──────────────────────────────────────────────────────────
-  let fieldsQuery = supabase
-    .from('fields')
-    .select('*, assigned_agent:profiles!fields_assigned_agent_id_fkey(*)')
-    .order('created_at', { ascending: false })
+let fieldsQuery = supabase
+  .from('fields')
+  .select('*, assigned_agent:profiles!fields_assigned_agent_id_fkey(*)')
+  .order('created_at', { ascending: false })
 
-  if (!isAdmin) {
-    fieldsQuery = fieldsQuery.eq('assigned_agent_id', user.id)
-  }
+if (!isAdmin) {
+  fieldsQuery = fieldsQuery.eq('assigned_agent_id', user.id)
+}
 
-  const { data: rawFields } = await fieldsQuery
+// fields + agentCount in parallel
+const [fieldsRes, agentCountRes] = await Promise.all([
+  fieldsQuery,
+  isAdmin
+    ? supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .eq('role', 'field_agent')
+    : Promise.resolve({ data: null, count: 0 })
+])
+
+const rawFields = fieldsRes.data
+let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
   const fields = (rawFields ?? []).map(f => withStatus(f as Field))
 
   const totalFields    = fields.length
@@ -43,7 +61,7 @@ export default async function DashboardPage() {
   const atRiskFields   = fields.filter(f => f.status === 'at_risk').length
   const completedFields = fields.filter(f => f.status === 'completed').length
 
-  // ── Recent updates (last 5) ───────────────────────────────────────────────
+  // last 5 updates
   let updatesQuery = supabase
     .from('field_updates')
     .select('*, agent:profiles!field_updates_agent_id_fkey(*), field:fields(id,name,crop_type)')
@@ -59,14 +77,6 @@ export default async function DashboardPage() {
 
   const { data: recentUpdates } = await updatesQuery
 
-  // ── Agent count (admin only) ──────────────────────────────────────────────
-  let agentCount = 0
-  if (isAdmin) {
-    const { count } = await supabase
-      .from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'field_agent')
-    agentCount = count ?? 0
-  }
-
   const atRiskList = fields.filter(f => f.status === 'at_risk').slice(0, 4)
 
   return (
@@ -74,8 +84,9 @@ export default async function DashboardPage() {
       {/* Welcome */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display text-2xl font-bold text-emerald-950">
-            Good {getGreeting()}, {profile.full_name?.split(' ')[0] ?? 'there'} 👋
+          <h2 className="font-display text-2xl font-bold text-emerald-950 flex items-center gap-2">
+            <FarmerIcon className="w-5 h-5 text-emerald-600" />
+            Good {getGreeting()}, {profile.full_name?.split(' ')[0] ?? 'there'}
           </h2>
           <p className="text-muted-foreground mt-1">
             {isAdmin ? 'Here is an overview of all your fields.' : 'Here is the status of your assigned fields.'}
