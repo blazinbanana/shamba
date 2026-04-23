@@ -117,7 +117,7 @@ export default function FieldForm({ field, agents, adminId }: Props) {
                   <Label>Crop Type *</Label>
                   <Select value={form.crop_type} onValueChange={v => set('crop_type', v)} required>
                     <SelectTrigger><SelectValue placeholder="Select crop…" /></SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-60">
                       {CROP_TYPES.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                     </SelectContent>
                   </Select>
@@ -127,7 +127,7 @@ export default function FieldForm({ field, agents, adminId }: Props) {
                   <Label>Current Stage *</Label>
                   <Select value={form.current_stage} onValueChange={v => set('current_stage', v)}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-60">
                       {FIELD_STAGES.map(s => (
                         <SelectItem key={s} value={s}>{STAGE_CONFIG[s].icon} {STAGE_CONFIG[s].label}</SelectItem>
                       ))}
@@ -192,7 +192,7 @@ export default function FieldForm({ field, agents, adminId }: Props) {
                 <Label>Assigned Agent</Label>
                 <Select value={form.assigned_agent_id || 'none'} onValueChange={v => set('assigned_agent_id', v === 'none' ? '' : v)}>
                   <SelectTrigger><SelectValue placeholder="Unassigned" /></SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="max-h-60">
                     <SelectItem value="none">— Unassigned —</SelectItem>
                     {agents.map(a => (
                       <SelectItem key={a.id} value={a.id}>
