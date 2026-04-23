@@ -37,19 +37,27 @@ export default function FieldsFilter() {
 
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-sm text-muted-foreground font-medium">Stage:</span>
-        {FIELD_STAGES.map(stage => (
-          <button
-            key={stage}
-            onClick={() => update('stage', activeStage === stage ? null : stage)}
-            className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-all ${
-              activeStage === stage
-                ? `${STAGE_CONFIG[stage].bg} ${STAGE_CONFIG[stage].color} ${STAGE_CONFIG[stage].border}`
-                : 'bg-white border-border text-muted-foreground hover:border-emerald-300'
-            }`}
-          >
-            {STAGE_CONFIG[stage].icon} {STAGE_CONFIG[stage].label}
-          </button>
-        ))}
+       {FIELD_STAGES.map(stage => {
+          // Extract the capitalized Icon variable
+          const Icon = STAGE_CONFIG[stage].icon;
+          
+          return (
+            <button
+              key={stage}
+              onClick={() => update('stage', activeStage === stage ? null : stage)}
+              
+              className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border font-medium transition-all ${
+                activeStage === stage
+                  ? `${STAGE_CONFIG[stage].bg} ${STAGE_CONFIG[stage].color} ${STAGE_CONFIG[stage].border}`
+                  : 'bg-white border-border text-muted-foreground hover:border-emerald-300'
+              }`}
+            >
+              
+              <Icon className="w-3.5 h-3.5 shrink-0" />
+              {STAGE_CONFIG[stage].label}
+            </button>
+          )
+        })}
 
         <span className="text-sm text-muted-foreground font-medium ml-2">Status:</span>
         {(['active', 'at_risk', 'completed'] as const).map(s => (

@@ -17,6 +17,7 @@ interface Props {
 export default function FieldCard({ field, showAgent = false }: Props) {
   const stage = STAGE_CONFIG[field.current_stage]
   const progress = getStageProgress(field.current_stage)
+  const Icon = stage.icon
 
   return (
     <Link href={`/fields/${field.id}`}>
@@ -42,7 +43,7 @@ export default function FieldCard({ field, showAgent = false }: Props) {
 
           {/* Stage */}
           <div className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${stage.bg} ${stage.color} ${stage.border} mb-4`}>
-            <span>{stage.icon}</span>
+            <Icon className="w-3.5 h-3.5 shrink-0" />
             {stage.label}
           </div>
 

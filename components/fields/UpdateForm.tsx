@@ -79,11 +79,21 @@ export default function UpdateForm({ fieldId, currentStage, agentId }: Props) {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {FIELD_STAGES.map(s => (
-                  <SelectItem key={s} value={s}>
-                    {STAGE_CONFIG[s].icon} {STAGE_CONFIG[s].label}
-                  </SelectItem>
-                ))}
+                {FIELD_STAGES.map(s => {
+                  //Extract the icon component
+                  const Icon = STAGE_CONFIG[s].icon;
+                  
+                  return (
+                    <SelectItem key={s} value={s}>
+                      
+                      <div className="flex items-center gap-2">
+                        
+                        <Icon className="w-4 h-4 shrink-0" />
+                        <span>{STAGE_CONFIG[s].label}</span>
+                      </div>
+                    </SelectItem>
+                  )
+                })}
               </SelectContent>
             </Select>
           </div>
