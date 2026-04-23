@@ -13,14 +13,7 @@ import {
   Users, Plus, ArrowRight, Clock,
 } from 'lucide-react'
 import type { Field, FieldUpdate, Profile } from '@/lib/types'
-function FarmerIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M12 2C9 2 7 4 7 6s2 4 5 4 5-2 5-4-2-4-5-4z" stroke="currentColor" strokeWidth="2"/>
-      <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" strokeWidth="2"/>
-    </svg>
-  )
-}
+import { FarmerTractorIcon } from '@/components/ui/FarmerTractorIcon'
 export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -84,9 +77,9 @@ let agentCount = isAdmin ? (agentCountRes.count ?? 0) : 0
       {/* Welcome */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display text-2xl font-bold text-emerald-950 flex items-center gap-2">
-            <FarmerIcon className="w-5 h-5 text-emerald-600" />
+          <h2 className="font-display text-2xl font-bold text-emerald-950 flex items-center gap-2 flex-wrap">
             Good {getGreeting()}, {profile.full_name?.split(' ')[0] ?? 'there'}
+            <FarmerTractorIcon size={40} className="translate-y-0.5" />
           </h2>
           <p className="text-muted-foreground mt-1">
             {isAdmin ? 'Here is an overview of all your fields.' : 'Here is the status of your assigned fields.'}
