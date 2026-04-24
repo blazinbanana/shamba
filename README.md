@@ -17,7 +17,7 @@ A field management system for tracking crop progress across multiple fields duri
 
 | Feature | Admin | Field Agent |
 |---|---|---|
-| Dashboard overview | can All fields | can Assigned fields |
+| Dashboard overview |  All fields |  Assigned fields |
 | Create / edit / delete fields | can | cannot |
 | Assign agents to fields | can | cannot |
 | View all field updates | can | can (assigned fields) |
