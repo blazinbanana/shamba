@@ -175,7 +175,7 @@ export default function AuthForm({ mode }: Props) {
               <div className="space-y-1.5">
                 <Label htmlFor="name">Full name</Label>
                 <Input
-                  id="name" placeholder="Jane Kimani"
+                  id="name" placeholder="Alice Njeri"
                   value={form.name} onChange={e => set('name', e.target.value)}
                   required className="h-11"
                 />
@@ -185,7 +185,7 @@ export default function AuthForm({ mode }: Props) {
             <div className="space-y-1.5">
               <Label htmlFor="email">Email address</Label>
               <Input
-                id="email" type="email" placeholder="njeri@shamba.co"
+                id="email" type="email" placeholder="njeri@shamba.com"
                 value={form.email} onChange={e => set('email', e.target.value)}
                 required className="h-11"
               />
